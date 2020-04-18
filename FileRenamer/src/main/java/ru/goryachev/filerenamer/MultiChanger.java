@@ -25,7 +25,7 @@ public class MultiChanger {
         
         for(int i=0; i<fileList.length; i++){
         	
-        	numbFrom = numbFrom + i;
+        	int counter = numbFrom ++;
         	
             String bufferedName = fileList[i].getName(); // read the current name
            

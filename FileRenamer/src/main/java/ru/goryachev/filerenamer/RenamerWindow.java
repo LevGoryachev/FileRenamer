@@ -54,7 +54,7 @@ public class RenamerWindow extends JFrame {
 						
 		Component numberLabel = new JLabel("Начать отсчет нумерации файлов с ");
 		Pane.add(numberLabel);
-		this.numberField = new JTextField(10);
+		this.numberField = new JTextField("1", 10);
 		Pane.add(numberField);
 		
 		this.renamerButton = new JButton("Выбрать папку в которой лежат файлы");
@@ -91,26 +91,43 @@ public class RenamerWindow extends JFrame {
 	public class ButtonListener implements ActionListener{
 	
 		 public void actionPerformed(ActionEvent e) {
-			
-			if(e.getSource() == renamerButton) {
+			 
+			 if(e.getSource() == renamerButton) {
 			
 				newName =  nameField.getText();
 				newExt = extField.getText();
-				fromNo = Integer.parseInt(numberField.getText());
+				fromNo = Integer.parseInt(numberField.getText()) - 1;
 				
-				JFileChooser chooseFolder = new JFileChooser();             
-				chooseFolder.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				int choice = chooseFolder.showOpenDialog(RenamerWindow.this);
+				if(newExt.trim().length() != 0) {
 			
-				if (choice == JFileChooser.APPROVE_OPTION ) {
-					JOptionPane.showMessageDialog(RenamerWindow.this, "Переименовать все файлы в выбранной папке??? " + "\n" + chooseFolder.getSelectedFile());
-					
-					path =  chooseFolder.getSelectedFile();
-                                                
-						MultiChanger multichanger = new MultiChanger(path, newName, newExt, fromNo);
-						multichanger.multiChange();
-                
+					JFileChooser chooseFolder = new JFileChooser();             
+					chooseFolder.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+					int choice = chooseFolder.showOpenDialog(RenamerWindow.this);
+			
+					if (choice == JFileChooser.APPROVE_OPTION ) {
+
+						//JOptionPane.showMessageDialog(RenamerWindow.this, "Переименовать все файлы в выбранной папке??? " + "\n" + chooseFolder.getSelectedFile());
+											
+						int confirm = JOptionPane.showConfirmDialog(RenamerWindow.this, "Переименовать все файлы в выбранной папке??? " + "\n" + chooseFolder.getSelectedFile());
+						
+						if (confirm == JOptionPane.YES_OPTION) {
+							
+							path =  chooseFolder.getSelectedFile();
+						
+							MultiChanger multichanger = new MultiChanger(path, newName, newExt, fromNo);
+							multichanger.multiChange();
+
+						} else if (confirm == JOptionPane.NO_OPTION) {
+							
+						}
+					}
 				}
+				
+				else {
+					JOptionPane.showMessageDialog (RenamerWindow.this, "Введите хотя бы расширение");
+										
+				}
+				
 			}
 		
 		}
