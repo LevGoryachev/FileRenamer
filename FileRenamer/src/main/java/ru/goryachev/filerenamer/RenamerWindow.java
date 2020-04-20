@@ -2,23 +2,14 @@ package ru.goryachev.filerenamer;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.io.File;
-import java.nio.file.Path;
-import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
@@ -106,7 +97,6 @@ public class RenamerWindow extends JFrame {
 			
 					if (choice == JFileChooser.APPROVE_OPTION ) {
 
-						//JOptionPane.showMessageDialog(RenamerWindow.this, "Переименовать все файлы в выбранной папке??? " + "\n" + chooseFolder.getSelectedFile());
 											
 						int confirm = JOptionPane.showConfirmDialog(RenamerWindow.this, "Переименовать все файлы в выбранной папке??? " + "\n" + chooseFolder.getSelectedFile());
 						
